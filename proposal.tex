@@ -8,6 +8,7 @@
 \chapter{The case for bond graph modeling}
 Bond graphs provide a complimentary and alternative view of a system graph. By this, it is meant, for example, the schematic for an electrical circuit, or equivalent depictions in terms of graphs where the generalised Kirchhoff's effort law applies to graph nodes, and the generalised Kirchhoff's flow law applies to graph cycles. Instead of this, a bond graph displays a \emph{power port} view of a system; Kirchhoff's effort law applies at a 0 or p-type junction, and Kirchhoff's flow law applies to a 1 or s-type junction. It has been shown that they are basicaly equivalent representations of the same topological system; they are merely different pictorial representations. One is neither better or worse than the other; their strengths and weaknesses are merely the cause of the pictorial depiction used, not the underlying combinitoric system object.
 \section{Fundamental ideas and mathematcal tools}
+Several important mathematical tools shall be taken advantage of. These tools, which should be pretty much always used, seem to be neglected, or at least, not used as often as they should.
 \subsection{All physical variables are tensors}
 Nature has no preferred coordinate system. Thus, every physical quantity is necessarily tensorial in nature. Tensors provide an elegant, coordinate-free modeling style, which can be exploited when it comes time to numerically evaluate them as a desirable coordinate system can be chosen independantly of the modeling phase.
 \subsection{Configuration space is a symplectic manifold and a Dirac structure}
@@ -25,7 +26,7 @@ There appears to be very little published application of bond graphs to aerospac
 \section{Development of a model of a two-body system}
 Creation of a two-body system, with gravitational attraction. Base it on numerous free-body mechanical examples. This may provide the opportunity to introduce a new element; a combined inertia and source. 
 \section{Development of a symplectic numerical integrator}
-Conservation of energy in simulations is important, especially in long-running and large step-size integration schemes.
+Conservation of energy in simulations is important, especially in long-running and large step-size integration schemes. Unfortunately, this is rarely the case; for example, the extremely popular RK4 integration scheme is non-symplectic: it doesn't preserve energy. As such, it is of vital importance that a symplectic integrator be developed in order to conserve energy in a bond graph.
 \section{Development of a bond graph library in Sage}
 Sage is an open-source mathematics environment based on Python, GAP, PARI, Octave, and numerous other open-source mathematics software. It is still in active development, and is sorely lacking in engineering features, such as no control theory library. It is, however, rather highly developed in terms of graph theory, combinitorics, and symbolic algebra; thus it represents a good opportunity to both develop a new area, and contribute to a widely used, open-source system.
 \subsection{Base bond graph representation}
