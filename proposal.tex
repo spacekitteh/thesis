@@ -4,15 +4,16 @@
 
 \begin{document}
 \maketitle
+\tableofcontents
 \chapter{The case for bond graph modeling}
 Bond graphs provide a complimentary and alternative view of a system graph. By this, it is meant, for example, the schematic for an electrical circuit, or equivalent depictions in terms of graphs where the generalised Kirchhoff's effort law applies to graph nodes, and the generalised Kirchhoff's flow law applies to graph cycles. Instead of this, a bond graph displays a \emph{power port} view of a system; Kirchhoff's effort law applies at a 0 or p-type junction, and Kirchhoff's flow law applies to a 1 or s-type junction. It has been shown that they are basicaly equivalent representations of the same topological system; they are merely different pictorial representations. One is neither better or worse than the other; their strengths and weaknesses are merely the cause of the pictorial depiction used, not the underlying combinitoric system object.
 \section{Fundamental ideas and mathematcal tools}
 \subsection{All physical variables are tensors}
 Nature has no preferred coordinate system. Thus, every physical quantity is necessarily tensorial in nature. Tensors provide an elegant, coordinate-free modeling style, which can be exploited when it comes time to numerically evaluate them as a desirable coordinate system can be chosen independantly of the modeling phase.
 \subsection{Configuration space is a symplectic manifold and a Dirac structure}
-Put simply, a Dirac structure is a symplectic manifold such that its dimensions are an integer multiple of a pair of flow and effort dimensions. 
+Put simply, a Dirac structure is a symplectic manifold such that its dimensions are an integer multiple of a pair of flow and effort dimensions. The configuration of a bond graph is represented by a Dirac structure. This information should be exploited; numeric integrators should use this fact to improve their accuracy. 
 \subsection{Power is what drives a physical system}
-As it is the flow of energy over time, and it takes energy to change physical variables, it is of central importance to keep track of.
+As it is the flow of energy over time, and it takes energy to change physical variables, it is of central importance to keep track of. The bonds in bond graphs represent power exchange.
 \subsection{Topology of a physical system is a combinitoric object}
 Bond graphs and linear graphs represent the same object; both are fundamentally isomorphic except for trivial graphical representation issues
 \subsection{Dissipative port-Hamiltonian systems with junction structure}
@@ -34,5 +35,5 @@ A matriod perfectly captures the underlying structure of the physical system; mu
 \subsection{Causality assignment}
 Equivalent to a psuedo-colouring of the underlying matroid; fairly straightforward. It is not entirely necessary, however, if an \emph{equational} statement is used, such as in Modelica, as opposed to \emph{assignment} statement such as in C/C++.
 \subsection{Extraction of system equations}
-A system of equations can provide much insight into the system, and allows further study such as perturbation analysis.
+A system of equations can provide much insight into the system, and allows further study such as perturbation analysis. In the most general case, this yields a set of differential-algebraic equations; these can be either PDAEs or ODAEs, depending on what is being modeled. For example, position can be represented (in a classical mechanics sense) as a ODAE, whereas the flexing of a beam can be represented as a PDAE. Extraction of these equations is fairly straight-forward, but simplification can be tricky, depending on the complexity of the system.
 \end{document}
