@@ -1,0 +1,6 @@
+# output of tex and emacs
+*.aux
+*.log
+*.tex~
+proposal.dvi
+proposal.pdf
