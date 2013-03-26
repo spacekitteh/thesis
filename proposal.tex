@@ -1,0 +1,37 @@
+\documentclass[utf,a4paper,12pt]{report}
+\title{Development of the theory of bond graph modeling in the aerospace domain}
+\author{Sophie Taylor, n6362057}
+
+\begin{document}
+\maketitle
+\chapter{The case for bond graph modeling}
+Bond graphs provide a complimentary and alternative view of a system graph. By this, it is meant, for example, the schematic for an electrical circuit, or equivalent depictions in terms of graphs where the generalised Kirchhoff's effort law applies to graph nodes, and the generalised Kirchhoff's flow law applies to graph cycles. Instead of this, a bond graph displays a \emph{power port} view of a system; Kirchhoff's effort law applies at a 0 or p-type junction, and Kirchhoff's flow law applies to a 1 or s-type junction. It has been shown that they are basicaly equivalent representations of the same topological system; they are merely different pictorial representations. One is neither better or worse than the other; their strengths and weaknesses are merely the cause of the pictorial depiction used, not the underlying combinitoric system object.
+\section{Fundamental ideas and mathematcal tools}
+\subsection{All physical variables are tensors}
+Nature has no preferred coordinate system. Thus, every physical quantity is necessarily tensorial in nature. Tensors provide an elegant, coordinate-free modeling style, which can be exploited when it comes time to numerically evaluate them as a desirable coordinate system can be chosen independantly of the modeling phase.
+\subsection{Configuration space is a symplectic manifold and a Dirac structure}
+Put simply, a Dirac structure is a symplectic manifold such that its dimensions are an integer multiple of a pair of flow and effort dimensions. 
+\subsection{Power is what drives a physical system}
+As it is the flow of energy over time, and it takes energy to change physical variables, it is of central importance to keep track of.
+\subsection{Topology of a physical system is a combinitoric object}
+Bond graphs and linear graphs represent the same object; both are fundamentally isomorphic except for trivial graphical representation issues
+\subsection{Dissipative port-Hamiltonian systems with junction structure}
+Physical systems are inherently port-Hamiltonian. Energy is either transferred via a junction to another port-Hamiltonian system, or is irreversibly dissipated into the environment as entropy.
+\subsection{Object-oriented modeling}
+Bond graphs are excellent for their object-oriented capabilities; every cut-set creates an object, with the interface being the cut edges.
+\chapter{Planned areas and ideas to explore}
+\section{Development of a model of a two-body system}
+Creation of a two-body system, with gravitational attraction. Base it on numerous free-body mechanical examples. This may provide the opportunity to introduce a new element; a combined inertia and source. 
+\section{Development of a symplectic numerical integrator}
+Conservation of energy in simulations is important, especially in long-running and large step-size integration schemes.
+\section{Development of a bond graph library in Sage}
+Sage is an open-source mathematics environment based on Python, GAP, PARI, Octave, and numerous other open-source mathematics software. It is still in active development, and is sorely lacking in engineering features, such as no control theory library. It is, however, rather highly developed in terms of graph theory, combinitorics, and symbolic algebra; thus it represents a good opportunity to both develop a new area, and contribute to a widely used, open-source system.
+\subsection{Base bond graph representation}
+Simple graph seperated into interior and exterior vertices, and interior and exterior edges. Interior verticies are transformers or gyrators, and interior edges are part of the underlying junction structure. Exterior vertices are components such as resistors or capacitances, and exterior edges are connection ports to the same domain. While computing various matrices, such as the resistance distance matrix, components on external verticies can be transformed into weights on external edges.
+\subsection{Transformation to underlying matroid}
+A matriod perfectly captures the underlying structure of the physical system; much of the work involved with system modeling is combinitoric in nature, such as interconnection topology. By keeping track of which edges are connected to which components, the underlying topology can be simplified and modified using matroid theory.
+\subsection{Causality assignment}
+Equivalent to a psuedo-colouring of the underlying matroid; fairly straightforward. It is not entirely necessary, however, if an \emph{equational} statement is used, such as in Modelica, as opposed to \emph{assignment} statement such as in C/C++.
+\subsection{Extraction of system equations}
+A system of equations can provide much insight into the system, and allows further study such as perturbation analysis.
+\end{document}
