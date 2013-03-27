@@ -1,7 +1,8 @@
 \documentclass[utf,a4paper,12pt]{report}
-\title{Application of bond graph modeling in the aerospace domain}
+\title{Application of bond graph modeling in the aerospace domain: Hohmann transfer orbits}
 \author{Sophie Taylor, n6362057}
-
+\usepackage{amsmath}
+\usepackage{amsfonts}
 \begin{document}
 \maketitle
 \tableofcontents
@@ -21,7 +22,7 @@ Put simply, a Dirac structure is a symplectic manifold such that its dimensions 
 \subsection{Power is what drives a physical system}
 As it is the flow of energy over time, and it takes energy to change physical variables, it is of central importance to keep track of. The bonds in bond graphs represent power exchange.
 \subsection{Topology of a physical system is a combinitoric object}
-Bond graphs and linear graphs represent the same object; both are fundamentally isomorphic except for trivial graphical representation issues
+Bond graphs and linear graphs represent the same object; both are fundamentally isomorphic except for trivial graphical representation issues. Bond graphs, however, provide a better representation of power flow between components, whereas system graphs are better at showing nodes of equal effort.
 \subsection{Dissipative port-Hamiltonian systems with junction structure}
 Physical systems are inherently port-Hamiltonian. Energy is either transferred via a junction to another port-Hamiltonian system, or is irreversibly dissipated into the environment as entropy. Thus it is natural to use a method which can easily create a port-Hamiltonian formulation.
 \subsection{Object-oriented modeling}
@@ -36,9 +37,9 @@ Sage is an open-source mathematics environment based on Python, GAP, PARI, Octav
 \subsection{Base bond graph representation}
 Simple graph seperated into interior and exterior vertices, and interior and exterior edges. Interior verticies are transformers or gyrators, and interior edges are part of the underlying junction structure. Exterior vertices are components such as resistors or capacitances, and exterior edges are connection ports to the same domain. While computing various matrices, such as the resistance distance matrix, components on external verticies can be transformed into weights on external edges.
 \subsection{Transformation to underlying matroid}
-A matriod perfectly captures the underlying structure of the physical system; much of the work involved with system modeling is combinitoric in nature, such as interconnection topology. By keeping track of which edges are connected to which components, the underlying topology can be simplified and modified using matroid theory.
+A matriod perfectly captures the underlying structure of the physical system; much of the work involved with system modeling is combinitoric in nature, such as interconnection topology. By keeping track of which edges are connected to which components, the underlying topology can be simplified and modified using matroid theory. Sage has support for both matroid and Galois theory, which is used to understand the field $\mathbb{GF}(2)$, a natural representation of the edges in a graph.
 \subsection{Causality assignment}
-Equivalent to a psuedo-colouring of the underlying matroid; fairly straightforward. It is not entirely necessary, however, if an \emph{equational} statement is used, such as in Modelica, as opposed to \emph{assignment} statement such as in C/C++.
+Causality assignment is a vital step in the extraction of system equations.  It is not entirely necessary, however, if an \emph{equational} statement is used, such as in Modelica, as opposed to \emph{assignment} statement such as in C/C++. It has been shown that the process of assigning causality is equivalent to creating a psuedo-colouring of the underlying matroid representing the system. This process is much easier than the standard methods of causality assignment, which can cause difficulties for bond graphs which are not trees.
 \subsection{Extraction of system equations}
 A system of equations can provide much insight into the system, and allows further study such as perturbation analysis. In the most general case, this yields a set of differential-algebraic equations; these can be either PDAEs or ODAEs, depending on what is being modeled. For example, position can be represented (in a classical mechanics sense) as a ODAE, whereas the flexing of a beam can be represented as a PDAE. Extraction of these equations is fairly straight-forward, but simplification can be tricky, depending on the complexity of the system.
 
