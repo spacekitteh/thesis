@@ -45,8 +45,18 @@ A system of equations can provide much insight into the system, and allows furth
 
 These equations could then be evaluated numerically either within Sage, or passed into a Modelica environment.\footnote{A third option would be to integrate a Modelica solver into Sage; however, that is too ambitious a task to be included and not in the scope of this project.}
 \section{Development of a symplectic numerical integrator}
-Conservation of energy in simulations is important, especially in long-running and large step-size integration schemes. Unfortunately, this is rarely the case; for example, the extremely popular RK4 integration scheme is non-symplectic: it doesn't preserve energy. As such, it is of vital importance that a symplectic integrator be developed in order to conserve energy in a bond graph.
+Conservation of energy in simulations is important, especially in long-running, large step-size integration schemes. Unfortunately, this is rarely the case; for example, the extremely popular RK4 integration scheme is non-symplectic: it doesn't preserve energy. As such, it is of vital importance that a symplectic integrator be developed in order to conserve energy in a bond graph.
+
+This deliverable will also be integrated into Sage. As Sage has plenty of support for differential equations, it should be a fairly simple matter to acheive.
+
+
 \section{Development of a model of a two-body system}
 Creation of a two-body system, with gravitational attraction. Base it on numerous free-body mechanical examples. This may provide the opportunity to introduce a new element; a combined inertia and effort source, to model the gravitational attraction intrinsic to mass. \footnote{Of course, in general relativity, energy density contributes to gravitational attraction too, so energy storage elements also be augmented with an effort source. This may be an interesting topic to be persued in further research; however, it will not be explored in this project.} 
 
+\section{Creation of a simple satellite model}
+As two-body systems are usually modeled with point masses, they must be converted to full six degree-of-freedom simulations in order to model vehicles. Due to the directional nature of rocket engines, the satellite model must take into account attitude. 
+
+\chapter{Timeline}
+
+\chapter{Literature review}
 \end{document}
