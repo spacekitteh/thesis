@@ -1,12 +1,15 @@
 \documentclass[utf,a4paper,12pt]{report}
-\title{Development of the theory of bond graph modeling in the aerospace domain}
+\title{Application of bond graph modeling in the aerospace domain}
 \author{Sophie Taylor, n6362057}
 
 \begin{document}
 \maketitle
 \tableofcontents
+
 \chapter{The case for bond graph modeling}
-Bond graphs provide a complimentary and alternative view of a system graph. By this, it is meant, for example, the schematic for an electrical circuit, or equivalent depictions in terms of graphs where the generalised Kirchhoff's effort law applies to graph nodes, and the generalised Kirchhoff's flow law applies to graph cycles. Instead of this, a bond graph displays a \emph{power port} view of a system; Kirchhoff's effort law applies at a 0 or p-type junction, and Kirchhoff's flow law applies to a 1 or s-type junction. It has been shown that they are basicaly equivalent representations of the same topological system; they are merely different pictorial representations. One is neither better or worse than the other; their strengths and weaknesses are merely the cause of the pictorial depiction used, not the underlying combinitoric system object.
+Bond graphs provide a complimentary and alternative view of a system graph. By this, it is meant, for example, the schematic for an electrical circuit, or equivalent depictions in terms of graphs where the generalised Kirchhoff's effort law applies to graph nodes, and the generalised Kirchhoff's flow law applies to graph cycles.
+
+ Instead of this, a bond graph displays a \emph{power port} view of a system; Kirchhoff's effort law applies at a 0 or p-type junction, and Kirchhoff's flow law applies to a 1 or s-type junction. It has been shown that they are basicaly equivalent representations of the same topological system; they are merely different pictorial representations. One is neither better or worse than the other; their strengths and weaknesses are merely the cause of the pictorial depiction used, not the underlying combinitoric system object.
 \section{Fundamental ideas and mathematcal tools}
 Several important mathematical tools shall be taken advantage of. These tools, which should be pretty much always used, seem to be neglected, or at least, not used as often as they should.
 \subsection{All physical variables are tensors}
@@ -22,12 +25,9 @@ Physical systems are inherently port-Hamiltonian. Energy is either transferred v
 \subsection{Object-oriented modeling}
 Bond graphs are excellent for their object-oriented capabilities; every cut-set creates an object, with the interface being the cut edges.
 \chapter{Planned areas and ideas to explore}
-There appears to be very little published application of bond graphs to aerospace systems. Furthermore, there is little support in current mainstream engineering software for bond graphs. Thus, it is proposed to create a basic bond graph library, and use it to create a proof-of-concept example.
-\section{Development of a model of a two-body system}
-Creation of a two-body system, with gravitational attraction. Base it on numerous free-body mechanical examples. This may provide the opportunity to introduce a new element; a combined inertia and source. 
-\section{Development of a symplectic numerical integrator}
-Conservation of energy in simulations is important, especially in long-running and large step-size integration schemes. Unfortunately, this is rarely the case; for example, the extremely popular RK4 integration scheme is non-symplectic: it doesn't preserve energy. As such, it is of vital importance that a symplectic integrator be developed in order to conserve energy in a bond graph.
+There appears to be very little published application of bond graphs to aerospace systems. Furthermore, there is little support in current mainstream engineering software for bond graphs. Thus, it is proposed to create a basic bond graph library, and use it to create a proof-of-concept example. This example will be the simulation of a satellite undertaking a Hohmann transfer orbit from low Earth orbit, to geostationary orbit. This requires the creation of several deliverables, followed by verification of correctness, simulation of the created models, and finally, an a posteriori discussion of the suitability of using bond graph techniques.
 \section{Development of a bond graph library in Sage}
+The first deliverable will be a bond graph library for Sage. By this, it is meant a library for creating, representing, manipulation, and simulation of bond graphs.
 Sage is an open-source mathematics environment based on Python, GAP, PARI, Octave, and numerous other open-source mathematics software. It is still in active development, and is sorely lacking in engineering features, such as no control theory library. It is, however, rather highly developed in terms of graph theory, combinitorics, and symbolic algebra; thus it represents a good opportunity to both develop a new area, and contribute to a widely used, open-source system.
 \subsection{Base bond graph representation}
 Simple graph seperated into interior and exterior vertices, and interior and exterior edges. Interior verticies are transformers or gyrators, and interior edges are part of the underlying junction structure. Exterior vertices are components such as resistors or capacitances, and exterior edges are connection ports to the same domain. While computing various matrices, such as the resistance distance matrix, components on external verticies can be transformed into weights on external edges.
@@ -37,4 +37,11 @@ A matriod perfectly captures the underlying structure of the physical system; mu
 Equivalent to a psuedo-colouring of the underlying matroid; fairly straightforward. It is not entirely necessary, however, if an \emph{equational} statement is used, such as in Modelica, as opposed to \emph{assignment} statement such as in C/C++.
 \subsection{Extraction of system equations}
 A system of equations can provide much insight into the system, and allows further study such as perturbation analysis. In the most general case, this yields a set of differential-algebraic equations; these can be either PDAEs or ODAEs, depending on what is being modeled. For example, position can be represented (in a classical mechanics sense) as a ODAE, whereas the flexing of a beam can be represented as a PDAE. Extraction of these equations is fairly straight-forward, but simplification can be tricky, depending on the complexity of the system.
+
+These equations could then be evaluated numerically either within Sage, or passed into a Modelica environment.\footnote{A third option would be to integrate a Modelica solver into Sage; however, that is too ambitious a task to be included and not in the scope of this project.}
+\section{Development of a symplectic numerical integrator}
+Conservation of energy in simulations is important, especially in long-running and large step-size integration schemes. Unfortunately, this is rarely the case; for example, the extremely popular RK4 integration scheme is non-symplectic: it doesn't preserve energy. As such, it is of vital importance that a symplectic integrator be developed in order to conserve energy in a bond graph.
+\section{Development of a model of a two-body system}
+Creation of a two-body system, with gravitational attraction. Base it on numerous free-body mechanical examples. This may provide the opportunity to introduce a new element; a combined inertia and effort source, to model the gravitational attraction intrinsic to mass. \footnote{Of course, in general relativity, energy density contributes to gravitational attraction too, so energy storage elements also be augmented with an effort source. This may be an interesting topic to be persued in further research; however, it will not be explored in this project.} 
+
 \end{document}
