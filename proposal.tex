@@ -7,9 +7,11 @@
 \tableofcontents
 
 \chapter{The case for bond graph modeling}
-Bond graphs provide a complimentary and alternative view of a system graph. By this, it is meant, for example, the schematic for an electrical circuit, or equivalent depictions in terms of graphs where the generalised Kirchhoff's effort law applies to graph nodes, and the generalised Kirchhoff's flow law applies to graph cycles.
+Bond graphs provide a complimentary and alternative view of a system graph. By system graph, it is meant, for example, the schematic for an electrical circuit, or equivalent depictions in terms of graphs where the generalised Kirchhoff's effort law applies to graph nodes, and the generalised Kirchhoff's flow law applies to graph cycles.
 
  Instead of this, a bond graph displays a \emph{power port} view of a system; Kirchhoff's effort law applies at a 0 or p-type junction, and Kirchhoff's flow law applies to a 1 or s-type junction. It has been shown that they are basicaly equivalent representations of the same topological system; they are merely different pictorial representations. One is neither better or worse than the other; their strengths and weaknesses are merely the cause of the pictorial depiction used, not the underlying combinitoric system object.
+
+Bond graphs, as opposed to system graphs, are focused on energy flow. Because of this, they appear to be naturally suited to aerospace systems, where management of energy is vital to keeping the systems operating within safe limits. For example, if a spacecraft is re-entering the atmosphere at too high a speed, it will either burn up or bounce off the atmosphere, depending on the angle of entry. If it is too slow, it can fail to reach safe landing areas.
 \section{Fundamental ideas and mathematcal tools}
 Several important mathematical tools shall be taken advantage of. These tools, which should be pretty much always used, seem to be neglected, or at least, not used as often as they should.
 \subsection{All physical variables are tensors}
@@ -23,9 +25,11 @@ Bond graphs and linear graphs represent the same object; both are fundamentally 
 \subsection{Dissipative port-Hamiltonian systems with junction structure}
 Physical systems are inherently port-Hamiltonian. Energy is either transferred via a junction to another port-Hamiltonian system, or is irreversibly dissipated into the environment as entropy. Thus it is natural to use a method which can easily create a port-Hamiltonian formulation.
 \subsection{Object-oriented modeling}
-Bond graphs are excellent for their object-oriented capabilities; every cut-set creates an object, with the interface being the cut edges.
+Bond graphs are excellent for their object-oriented capabilities; every cut-set creates an object, with the interface being the cut edges. This provides a trivial method for creating object libraries, which is key to managing complexity in large projects.
 \chapter{Planned areas and ideas to explore}
 There appears to be very little published application of bond graphs to aerospace systems. Furthermore, there is little support in current mainstream engineering software for bond graphs. Thus, it is proposed to create a basic bond graph library, and use it to create a proof-of-concept example. This example will be the simulation of a satellite undertaking a Hohmann transfer orbit from low Earth orbit, to geostationary orbit. This requires the creation of several deliverables, followed by verification of correctness, simulation of the created models, and finally, an a posteriori discussion of the suitability of using bond graph techniques.
+
+Since orbital mechanics is all about management of energy, and bond graphs are a representation focused on energy flow, they should be a natural fit.
 \section{Development of a bond graph library in Sage}
 The first deliverable will be a bond graph library for Sage. By this, it is meant a library for creating, representing, manipulation, and simulation of bond graphs.
 Sage is an open-source mathematics environment based on Python, GAP, PARI, Octave, and numerous other open-source mathematics software. It is still in active development, and is sorely lacking in engineering features, such as no control theory library. It is, however, rather highly developed in terms of graph theory, combinitorics, and symbolic algebra; thus it represents a good opportunity to both develop a new area, and contribute to a widely used, open-source system.
