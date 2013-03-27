@@ -5,3 +5,6 @@
 proposal.dvi
 proposal.pdf
 *.toc
+*.bbl
+*.blg
+*.bib~
