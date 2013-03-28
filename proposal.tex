@@ -14,19 +14,23 @@ Bond graphs provide a complimentary and alternative view of a system graph. By s
 
 Bond graphs, as opposed to system graphs, are focused on energy flow. Because of this, they appear to be naturally suited to aerospace systems, where management of energy is vital to keeping the systems operating within safe limits. For example, if a spacecraft is re-entering the atmosphere at too high a speed, it will either burn up or bounce off the atmosphere, depending on the angle of entry. If it is too slow, it can fail to reach safe landing areas.
 \section{Fundamental ideas and mathematical tools}
-Several important mathematical tools shall be taken advantage of. These tools, which should be pretty much always used, seem to be neglected, or at least, not used as often as they should.
+Several important mathematical tools shall be taken advantage of. These tools and techniques, which should be pretty much always used, seem to be neglected, or at least, not used as often as they should.
+
+Some of them are rather abstract, such as matriod and Galois theory, and aren't covered in standard engineering courses. This is unfortunate, as many engineering tasks could be greatly simplified if these techniques are used.
 \subsection{All physical variables are tensors}
-Nature has no preferred coordinate system. Thus, every physical quantity is necessarily tensorial in nature. Tensors provide an elegant, coordinate-free modeling style, which can be exploited when it comes time to numerically evaluate them as a desirable coordinate system can be chosen independantly of the modeling phase.
+Nature has no preferred coordinate system. Thus, every physical quantity is necessarily tensorial in nature. Tensors provide an elegant, coordinate-free modeling style, which can be exploited when it comes time to numerically evaluate them as a desirable coordinate system can be chosen independantly of the modeling phase. Due to the enormous number of frames and associated coordinate systems that are inherent in aerospace systems, the usage of tensors provide a much-needed reduction in complexity.
 \subsection{Configuration space is a symplectic manifold and a Dirac structure}
 Put simply, a Dirac structure is a symplectic manifold such that its dimensions are an integer multiple of a pair of flow and effort dimensions. The configuration of a bond graph is represented by a Dirac structure. This information should be exploited; numeric integrators should use this fact to improve their accuracy. 
 \subsection{Power is what drives a physical system}
-As it is the flow of energy over time, and it takes energy to change physical variables, it is of central importance to keep track of. The bonds in bond graphs represent power exchange.
+As it is the flow of energy over time, and it takes energy to change physical variables, it is of central importance to keep track of. The bonds in bond graphs represent power exchange. This is in contrast to to linear graphs, which depict points of effort.
 \subsection{Topology of a physical system is a combinitoric object}
 Bond graphs and linear graphs represent the same object; both are fundamentally isomorphic except for trivial graphical representation issues. Bond graphs, however, provide a better representation of power flow between components, whereas system graphs are better at showing nodes of equal effort.
 \subsection{Dissipative port-Hamiltonian systems with junction structure}
-Physical systems are inherently port-Hamiltonian. Energy is either transferred via a junction to another port-Hamiltonian system, or is irreversibly dissipated into the environment as entropy. Thus it is natural to use a method which can easily create a port-Hamiltonian formulation.
+Physical systems are inherently port-Hamiltonian\footnote{This is true even at a quantum level.}. Energy is either transferred via a junction to another port-Hamiltonian system, or is irreversibly dissipated into the environment as entropy. Thus it is natural to use a method which can easily create a port-Hamiltonian formulation.
 \subsection{Object-oriented modeling}
 Bond graphs are excellent for their object-oriented capabilities; every cut-set creates an object, with the interface being the cut edges. This provides a trivial method for creating object libraries, which is key to managing complexity in large projects.
+
+Linear graphs are capable of abstraction in exactly the same manner too; howver, apart from objects such as electrical antennas, they provide little opportunity to represent objects via trees.
 \chapter{Planned areas and ideas to explore}
 There appears to be very little published application of bond graphs to aerospace systems. Furthermore, there is little support in current mainstream engineering software for bond graphs. Thus, it is proposed to create a basic bond graph library, and use it to create a proof-of-concept example. This example will be the simulation of a satellite undertaking a Hohmann transfer orbit from low Earth orbit, to geostationary orbit. This requires the creation of several deliverables, followed by verification of correctness, simulation of the created models, and finally, an a posteriori discussion of the suitability of using bond graph techniques.
 
@@ -44,11 +48,16 @@ Causality assignment is a vital step in the extraction of system equations.  It 
 A system of equations can provide much insight into the system, and allows further study such as perturbation analysis. In the most general case, this yields a set of differential-algebraic equations; these can be either PDAEs or ODAEs, depending on what is being modeled. For example, position can be represented (in a classical mechanics sense) as a ODAE, whereas the flexing of a beam can be represented as a PDAE. Extraction of these equations is fairly straight-forward, but simplification can be tricky, depending on the complexity of the system.
 
 These equations could then be evaluated numerically either within Sage, or passed into a Modelica environment.\footnote{A third option would be to integrate a Modelica solver into Sage; however, that is too ambitious a task to be included and not in the scope of this project.}
+\subsection{Development of a new element to represent frames}
+Current methods of representing reference frames in bond graphs usually involve using transformer (TF) elements. They become messier to represent once you consider non-inertial reference frames. Thus, development of a new element to repressent a transformation from one frame to another should be undertaken.
+
+\subsection{Explore the possibilty of real-time integration}
+The possibility of real-time integration would provide much usefulness in human-in-the-loop and hardware-in-the-loop simulation in the Sage environment. Currently, it is unlikely to support such a process out of the box, so it will likely have to be developed alongside the development of a symplectic integrator.
+
 \section{Development of a symplectic numerical integrator}
 Conservation of energy in simulations is important, especially in long-running, large step-size integration schemes. Unfortunately, this is rarely the case; for example, the extremely popular RK4 integration scheme is non-symplectic: it doesn't preserve energy. As such, it is of vital importance that a symplectic integrator be developed in order to conserve energy in a bond graph.
 
-This deliverable will also be integrated into Sage. As Sage has plenty of support for differential equations, it should be a fairly simple matter to acheive.
-
+This deliverable will also be integrated into Sage. As Sage has plenty of support for differential equations, it should be a fairly simple matter to acheive. An alternative would be to develop one for a Modelica solver; however, this presents greater challenges due to the nature of the individual Modelica environments.
 
 \section{Development of a model of a two-body system}
 Creation of a two-body system, with gravitational attraction. Base it on numerous free-body mechanical examples. This may provide the opportunity to introduce a new element; a combined inertia and effort source, to model the gravitational attraction intrinsic to mass. \footnote{Of course, in general relativity, energy density contributes to gravitational attraction too, so energy storage elements also be augmented with an effort source. This may be an interesting topic to be persued in further research; however, it will not be explored in this project.} 
@@ -56,13 +65,16 @@ Creation of a two-body system, with gravitational attraction. Base it on numerou
 \section{Creation of a simple satellite model}
 As two-body systems are usually modeled with point masses, they must be converted to full six degree-of-freedom simulations in order to model vehicles. Due to the directional nature of rocket engines, the satellite model must take into account attitude. 
 
+
+
+
 \chapter{Timeline}
 
 \chapter{Literature review}
 \section{Introductory books and surveys of bond graphs and associated mathematics}
 An excellent introductory textbook on bond graph modeling is \cite{Borutzky2010}. It is a coherent collection of a vast amount of results from the scattered papers on bond graph methodology, and written in a very friendly style.
 
-\cite{Birkett1989,Birkett1989a,Birkett1990,Birkett1990a,Birkett2002,Birkett2002a} establish a thorough theoretical justification of the bond graph methodology, especially in the topological and combinitoric sense; \cite{Lamb1997b,Lamb1997,Lamb1997a} establish similiar results but with more focus on physical systems.
+\cite{Birkett1989,Birkett1989a,Birkett1990,Birkett1990a,Birkett2002,Birkett2002a} establish a thorough theoretical justification of the bond graph methodology, especially in the topological and combinitoric sense; \cite{Lamb1997b,Lamb1997,Lamb1997a} establish similiar results but with more focus on physical systems. These two series of papers form the basis of the implementation to be used in Sage.
 \section{Control in bond graphs}
 
 \bibliographystyle{ieeetr}
