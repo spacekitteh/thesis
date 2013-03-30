@@ -51,7 +51,7 @@ These equations could then be evaluated numerically either within Sage, or passe
 \subsection{Development of a new element to represent frames}
 Current methods of representing reference frames in bond graphs usually involve using transformer (TF) elements. They become messier to represent once you consider non-inertial reference frames. Thus, development of a new element to repressent a transformation from one frame to another should be undertaken.
 
-\subsection{Explore the possibilty of real-time integration}
+\subsection{Examine the possibilty of real-time integration}
 The possibility of real-time integration would provide much usefulness in human-in-the-loop and hardware-in-the-loop simulation in the Sage environment. Currently, it is unlikely to support such a process out of the box, so it will likely have to be developed alongside the development of a symplectic integrator.
 
 \section{Development of a symplectic numerical integrator}
@@ -63,10 +63,13 @@ This deliverable will also be integrated into Sage. As Sage has plenty of suppor
 Creation of a two-body system, with gravitational attraction. Base it on numerous free-body mechanical examples. This may provide the opportunity to introduce a new element; a combined inertia and effort source, to model the gravitational attraction intrinsic to mass. \footnote{Of course, in general relativity, energy density contributes to gravitational attraction too, so energy storage elements also be augmented with an effort source. This may be an interesting topic to be persued in further research; however, it will not be explored in this project.} 
 
 \section{Creation of a simple satellite model}
-As two-body systems are usually modeled with point masses, they must be converted to full six degree-of-freedom simulations in order to model vehicles. Due to the directional nature of rocket engines, the satellite model must take into account attitude. 
+As two-body systems are usually modeled with point masses, they must be converted to full six degree-of-freedom simulations in order to model vehicles. Due to the directional nature of rocket engines, the satellite model must take into account attitude. This can be done quite simply with tensor-based bond graphs. The Sage bond graph library will be used to store and manipulate the model.
 
+\section{Simulation of the satellite model}
+This will involve extraction of the constitutive equations from the model. This may then be passed to Modelica, or converted into state space form; it depends on how capable the Sage library turns out to be. If it is possible to extract proper state space equations, then it will be a simple matter of numerical integration and plotting of the results.
 
-
+\section{Simulation of the Hohmann transfer}
+The necessary $\Delta V$ for executing a Hohmann transfer can be determined from well-known formulae. The thrust impulses necessary can be simulated by switched effort sources in the bond graph model, and so nothing new has to be developed in this step.
 
 \chapter{Timeline}
 
