@@ -49,7 +49,7 @@ Causality assignment is a vital step in the extraction of system equations.  It 
 \subsection{Extraction of system equations}
 A system of equations can provide much insight into the system, and allows further study such as perturbation analysis. In the most general case, this yields a set of differential-algebraic equations; these can be either PDAEs or ODAEs, depending on what is being modeled. For example, position can be represented (in a classical mechanics sense) as an ODAE, whereas the flexing of a beam can be represented as a PDAE. Extraction of these equations is fairly straight-forward, but simplification can be tricky, depending on the complexity of the system.
 
-These equations could then be evaluated numerically either within Sage, or passed into a Modelica environment.\footnote{A third option would be to integrate a Modelica solver into Sage; however, that is too ambitious a task to be included and not in the scope of this project.}
+These equations could then be evaluated numerically either within Sage, or passed into a Modelica environment.\footnote{A third option would be to integrate a Modelica solver into Sage; however, that is probably too ambitious a task to be included and not in the scope of this project.}
 \subsection{Development of a new element to represent frames}
 Current methods of representing reference frames in bond graphs usually involve using transformer (TF) elements. They become messier to represent once you consider non-inertial reference frames. Thus, development of a new element to represent a transformation from one frame to another should be undertaken.
 
@@ -74,9 +74,11 @@ This will involve extraction of the constitutive equations from the model. This 
 The necessary $\Delta V$ for executing a Hohmann transfer can be determined from well-known formulae. The thrust impulses necessary can be simulated by switched effort sources in the bond graph model, and so nothing new has to be developed in this step.
 
 \chapter{Timeline}
+The first task to be undertaken will be to develop the test case: the satellite bond graph. This should take no more than a week. Following this, the task of familirisation with the Sage programming interface begins. This could take several months, if the process for adding new mathematical concepts is difficult, but it is more likely to last no longer than four or five weeks. The creation of unit tests will then last another week or two. This should finish roughly around the mid-year break. 
 
+After resuming work, the gradual development of the bond graph framework will proceed in roughly two week blocks, with each block belonging to the addition of a new feature, such as import/export, matroid creation, graph transformation, and so on.
 \chapter{Literature review}
-
+There are numerous results in the literature reguarding the mathematical objects underlying bond graphs; however, there is comparitively little on the application of the theory.
 \section{Introductory books and surveys of bond graphs and associated mathematics}
 An excellent introductory textbook on bond graph modeling is \cite{Borutzky2010}. It is a coherent collection of a vast amount of results from the scattered papers on bond graph methodology, and written in a very friendly style.
 
